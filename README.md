@@ -8,4 +8,4 @@ O projeto foi criado do zero, a partir do código em HTML disponibilizado e uma 
 
 Feito com uso de JavaScript, HTML e CSS, com o programa VSCode.
 
-Você pode acessar o site online por aqui: https:/
+
