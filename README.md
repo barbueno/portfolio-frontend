@@ -8,4 +8,5 @@ O projeto foi criado do zero, a partir do código em HTML disponibilizado e uma 
 
 Feito com uso de JavaScript, HTML e CSS, com o programa VSCode.
 
+Acesse o site aqui --> https://barbueno.github.io/portfolio-frontend/
 
