@@ -36,12 +36,17 @@ function fieldValidation(field, validationFunction, errorMessage, ...args) {
     if (field == null) return false;
    
     let isFieldValid = validationFunction(field.value, ...args);
+    let errorElement = document.getElementById(field.id + "-error");
     if (!isFieldValid) {
         field.style.color = 'red';
-        document.getElementById(field.id + "-error").textContent = errorMessage;
+        if (errorElement) {
+            errorElement.textContent = errorMessage;
+        }
     } else {
         field.style.color = '';
-        document.getElementById(field.id + "-error").textContent = '';
+        if (errorElement) {
+            errorElement.textContent = '';
+        }
     }
    
     return isFieldValid;
@@ -54,10 +59,13 @@ function maxLength(value, maxLength) {
 function isValid() {
     var valid = true;
     
-    valid &= fieldValidation(fields.nome, isNotEmpty, "O Nome não pode estar vazio e deve ter no máximo 50 caracteres.") && fieldValidation(fields.nome, maxLength, "O Nome não pode estar vazio e deve ter no máximo 50 caracteres.", 50);
-    valid &= fieldValidation(fields.assunto, isNotEmpty, "O Assunto não pode estar vazio e deve ter no máximo 50 caracteres.") && fieldValidation(fields.assunto, maxLength, "O Assunto deve ter no máximo 50 caracteres.", 50);
-    valid &= fieldValidation(fields.email, isEmail, "Por favor, insira um endereço de e-mail válido.");
-    valid &= fieldValidation(fields.mensagem, isNotEmpty, "A Mensagem não pode estar vazia e deve ter no máximo 300 caracteres.") && fieldValidation(fields.mensagem, maxLength, "A Mensagem não pode estar vazia e deve ter no máximo 300 caracteres.", 300);
+    valid = fieldValidation(fields.nome, isNotEmpty, "O Nome não pode estar vazio e deve ter no máximo 50 caracteres.") && valid;
+    valid = fieldValidation(fields.nome, maxLength, "O Nome deve ter no máximo 50 caracteres.", 50) && valid;
+    valid = fieldValidation(fields.assunto, isNotEmpty, "O Assunto não pode estar vazio e deve ter no máximo 50 caracteres.") && valid;
+    valid = fieldValidation(fields.assunto, maxLength, "O Assunto deve ter no máximo 50 caracteres.", 50) && valid;
+    valid = fieldValidation(fields.email, isEmail, "Por favor, insira um endereço de e-mail válido.") && valid;
+    valid = fieldValidation(fields.mensagem, isNotEmpty, "A Mensagem não pode estar vazia e deve ter no máximo 300 caracteres.") && valid;
+    valid = fieldValidation(fields.mensagem, maxLength, "A Mensagem deve ter no máximo 300 caracteres.", 300) && valid;
    
     return valid;
 }
